@@ -1,0 +1,811 @@
+<?php
+function during_schema() {
+$schema['dur_access'] = array(
+  'description' => 'Map user access to contests and events',
+  'fields' => array(
+    'access_id' => array(
+      'description' => 'Access UID',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'access_guid' => array(
+      'description' => 'contest id',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => TRUE,
+    ),
+    'contest_guid' => array(
+      'description' => 'contest id',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => TRUE,
+    ),
+    'user_id' => array(
+      'description' => 'user id',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+      'access_type' => array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+    ),
+      'user_mail' => array(
+      'description' => 'User Email',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ),
+      'invitation_guid' => array(
+      'description' => 'invitation guid',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      
+  ),
+'primary key' => array('access_id'),
+);
+$schema['dur_contest'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'contest_id' => array(
+      'description' => 'Contest UID',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'contest_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => TRUE,
+    ),
+    'contest_title' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ),
+    'contest_status' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 20,
+      'not null' => FALSE,
+    ),
+    'start_date' => array(
+      'description' => 'TODO: please describe this field!',
+      'mysql_type' => 'datetime',
+    ),
+      'frequency' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ),
+      'units' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ),
+      'quantity' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ),
+    'end_date' => array(
+      'description' => 'TODO: please describe this field!',
+      'mysql_type' => 'datetime',
+    ),
+  ),
+  'primary key' => array('contest_id'),
+);
+$schema['dur_invitation'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'invitation_id' => array(
+      'description' => 'invitation id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+      'invitation_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'contest_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'user_email' => array(
+      'description' => 'user email',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+    ),
+    'invitation_status' => array(
+      'description' => 'invitation status',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => TRUE,
+    ),
+  ),
+  'primary key' => array('invitation_id'),
+);
+$schema['dur_registration'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'registration_id' => array(
+      'description' => 'registration id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+      'registration_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'invitation_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'contest_guid' => array(
+      'description' => 'contest id',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => TRUE,
+    ),
+    'contestant_id' => array(
+      'description' => 'contestant id',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),    
+    'payment_status' => array(
+      'description' => 'Flag to show if contestant has paid',
+      'type' => 'varchar',
+      'length' => 20,
+      'not null' => FALSE,
+    ),
+    'registration_status' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 20,
+      'not null' => FALSE,
+    ),
+  ),
+  'primary key' => array('registration_id'),
+);
+$schema['dur_scoring'] = array(
+  'description' => 'Holds the details about Contest scoring',
+  'fields' => array(
+    'scoring_id' => array(
+      'description' => 'scoring id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+      'scoring_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'contest_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'scoring_title' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+    ),
+    'scoring_type' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => TRUE,
+    ),
+    'game_type' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => TRUE,
+    ),
+    'num_of_events' => array(
+      'description' => 'number of events per score',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),    
+  ),
+  'primary key' => array('scoring_id'),
+);
+$schema['dur_challenge'] = array(
+  'description' => 'Holds the details about Contest scoring',
+  'fields' => array(
+    'challenge_id' => array(
+      'description' => 'scoring id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+      'challenge_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'contest_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'team_setting' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+    'challenge_type' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+    'scoring_setting' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => TRUE,
+    ),
+    'winning_pct' => array(
+      'description' => 'number of events per score',
+      'type' => 'numeric',
+      'size' => 'normal',
+      'not null' => FALSE,
+      'precision' => 10,
+      'scale' => 3,
+    ),
+    'winning_amt' => array(
+      'description' => 'number of events per score',
+      'type' => 'numeric',
+      'size' => 'normal',
+      'not null' => FALSE,
+      'precision' => 10,
+      'scale' => 3,
+    ),
+    'prize_setting' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+  ),
+  'primary key' => array('challenge_id'),
+);
+$schema['dur_prize'] = array(
+  'description' => 'Holds the details about Contest scoring',
+  'fields' => array(
+    'prize_id' => array(
+      'description' => 'prize id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+      'prize_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'challenge_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'contest_guid' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'prize_amt' => array(
+      'description' => 'TODO',
+      'type' => 'numeric',
+      'size' => 'normal',
+      'not null' => FALSE,
+      'precision' => 10,
+      'scale' => 3,
+    ),
+    'winner_rank' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'int',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+  ),
+  'primary key' => array('prize_id'),
+);
+$schema['dur_payout'] = array(
+  'description' => 'Holds the details about Contest scoring',
+  'fields' => array(
+    'payout_id' => array(
+      'description' => 'payout id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+      'payout_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'prize_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+      'challenge_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'contest_guid' => array(
+      'description' => 'TODO: please describe this field',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'contestant_id' => array(
+      'description' => 'TODO',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+    'payout_amt' => array(
+      'description' => 'number of events per score',
+      'type' => 'numeric',
+      'size' => 'normal',
+      'not null' => FALSE,
+      'precision' => 10,
+      'scale' => 3,
+    ),
+  ),
+  'primary key' => array('payout_id'),
+);
+$schema['dur_event'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'event_id' => array(
+      'description' => 'Contest UID',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'event_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16
+    ),
+    'contest_guid' => array(
+      'description' => 'event id',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),    
+    'event_title' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 65
+    ),
+    'event_date' => array(
+      'description' => 'TODO: please describe this field!',
+      'mysql_type' => 'datetime',
+    ),
+    'event_type' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 20,
+      'not null' => FALSE,
+    ),
+    'event_status' => array(
+      'description' => 'Flag to show if contestant has paid',
+      'type' => 'varchar',
+      'length' => 20,
+      'not null' => FALSE,
+    ),
+  ),
+  'primary key' => array('event_id'),
+);
+$schema['dur_result'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'result_id' => array(
+      'description' => 'Result UID',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'result_guid' => array(
+    'description' => 'result guid',
+    'type' => 'varchar',
+    'length' => 16,
+    ),
+    
+    'contest_guid' => array(
+      'description' => 'contest id',
+      'type' => 'varchar',
+      'length' => 16,
+    ),
+    'event_guid' => array(
+      'description' => 'event id',
+      'type' => 'varchar',
+      'length' => 16,
+    ),    
+    'contestant_id' => array(
+      'description' => 'contestant id',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+    'result_status' => array(
+      'description' => 'Flag to show if contestant has paid',
+      'type' => 'varchar',
+      'length' => 20,
+      'not null' => FALSE,
+    ),
+    'result_weight' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+    'measurement_1' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+      'measurement_2' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+      'measurement_3' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+      'measurement_total' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+      'body_fat_pct' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+      'custom_value' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'size' => 'big',
+      'not null' => FALSE,
+    ),
+      'eligible' => array(
+      'description' => 'eligible',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+  ),
+  'primary key' => array('result_id'),
+);
+$schema['dur_event_score'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'score_id' => array(
+      'description' => 'Score UID',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'contest_guid' => array(
+      'description' => 'contest id',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),    
+    'event_guid' => array(
+      'description' => 'event id',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),    
+    'result_guid' => array(
+      'description' => 'result guid',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'contestant_id' => array(
+      'description' => 'contestant id',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+    'eligible' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'tiny',
+      'not null' => FALSE,
+    ),
+    'start_weight' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'min_prev_weight' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'scored_weight' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'lbs_lost' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'lbs_lost_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'lbs_lost_eligible_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'lbs_lost_td' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'lbs_lost_td_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'pct_lost' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'pct_lost_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'pct_lost_eligible_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'pct_lost_td' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'pct_lost_td_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_start' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_min_prev' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_scored' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_lost' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_lost_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_lost_eligible_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_lost_td' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'measure_lost_td_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_start' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_min_prev' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_scored' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_lost' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_lost_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_lost_eligible_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_lost_td' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'float',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+    'bf_pct_lost_td_raw_rank' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'length' => 'medium',
+      'not null' => FALSE,
+    ),
+
+  ),
+  'primary key' => array('score_id'),
+);
+$schema['dur_comments'] = array(
+  'description' => 'Holds the details about Contests',
+  'fields' => array(
+    'comment_id' => array(
+      'description' => 'Comment UID',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'comment_guid' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16
+    ),
+      'reference_type' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => 16
+    ),
+    'reference_guid' => array(
+      'description' => 'reference_guid',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),    
+    'timestamp' => array(
+      'description' => 'TODO: please describe this field!',
+      'mysql_type' => 'timestamp',
+    ),
+    'user_id' => array(
+      'description' => 'user id',
+      'type' => 'int',
+      'size' => 'medium',
+      'not null' => FALSE,
+    ),
+    'comment' => array(
+      'description' => 'Comment',
+      'type' => 'varchar',
+      'length' => 2000,
+      'not null' => FALSE,
+    ),
+    'parent_comment_guid' => array(
+      'description' => 'TODO',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),
+    'tags' => array(
+      'description' => 'TODO',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ),  
+    'timestamp' => array(
+      'description' => 'TODO: please describe this field!',
+      'mysql_type' => 'datetime',
+    ),
+      'contest_guid' => array(
+      'description' => 'reference_guid',
+      'type' => 'varchar',
+      'length' => 16,
+      'not null' => FALSE,
+    ),    
+  ),
+  'primary key' => array('comment_id'),
+);
+  return $schema;
+}
+
+function during_uninstall(){
+  db_drop_table('dur_contest');
+  db_drop_table('dur_registration');
+  db_drop_table('dur_event');
+  db_drop_table('dur_result');
+  db_drop_table('dur_weekly_score');
+  db_drop_table('dur_invitation');
+  db_drop_table('dur_access');
+}

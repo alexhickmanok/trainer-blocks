@@ -1,0 +1,7 @@
+name = During
+description = Functions to support the collection and storage of data
+package = During
+core = 7.x
+
+files[] = during.module
+dependencies[] = date

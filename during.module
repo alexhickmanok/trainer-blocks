@@ -1,0 +1,508 @@
+<?php
+// Create the menu for challenges
+function during_menu(){
+    $items = array();	
+		
+	$items['during/contests'] = array(
+	'title' => 'Contests',
+	'page callback' => 'during_contests_page',
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_contest.inc',
+  );
+	
+	$items['during/contests/tab1'] = array(
+	'title' => 'Contests',
+	'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+	
+   $items['during/contests/tab2'] = array(
+	'title' => 'Create Contest',
+	'page callback' => 'drupal_get_form',
+	'page arguments' => array('during_contest_form'),
+	'access arguments' => array('access content'),
+	'type' => MENU_LOCAL_TASK,
+	'weight' => 1,
+	'file' => 'z_contest.inc',
+   );
+   
+   $items['during/contest/view/%'] = array(
+	'page callback' => 'during_contest_page',
+	'page arguments' => array(2,3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_contest.inc',
+	);
+   
+	$items['during/contest/view/%/tab1'] = array(
+	'title' => 'Contest Home',
+	'type' => MENU_DEFAULT_LOCAL_TASK,
+	);
+   
+   $items['during/contest/view/%/tab2'] = array(
+	'title' => 'Rules',
+	'page callback' => 'during_contest_rules_page',
+	'page arguments' => array(2,3),
+	'access arguments' => array('access content'),
+	'type' => MENU_LOCAL_TASK,
+	'file' => 'z_contest.inc',
+	);
+   
+   $items['during/contest/view/%/tab3'] = array(
+	'title' => 'Prizes',
+	'page callback' => 'during_contest_prizes_page',
+	'page arguments' => array(2,3),
+	'access arguments' => array('access content'),
+	'type' => MENU_LOCAL_TASK,
+	'file' => 'z_contest.inc',
+	);
+   
+   $items['during/contest/view/%/tab4'] = array(
+	'title' => 'Settings',
+	'page callback' => 'dur_contest_scoring_setup_page',
+	'page arguments' => array(2,3),
+	'access arguments' => array('access content'),
+	'type' => MENU_LOCAL_TASK,
+	'file' => 'z_scoring.inc',
+	);
+
+   $items['during/contest/view/%/tab5'] = array(
+	'title' => 'Events',
+	'page callback' => 'during_contest_page',
+	'page arguments' => array(2,3),
+	'access arguments' => array('access content'),
+	'type' => MENU_LOCAL_TASK,
+	'file' => 'z_contest.inc',
+	);
+      
+   $items['during/contest/edit/%'] = array(
+	'page callback' => 'drupal_get_form',
+	'page arguments' => array('during_contest_form',2,3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_contest.inc',
+	);
+   
+   $items['during/scoring/edit/%'] = array(
+	'page callback' => 'dur_contest_scoring_setup_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_scoring.inc',
+	);
+	
+	$items['during/admin/add/%'] = array(
+	'title' => 'Assign Admins',
+	'page callback' => 'drupal_get_form',
+	'page arguments' => array('during_admin_form',3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_admin.inc',
+	);
+
+	$items['during/invitation/add/%'] = array(
+	'title' => 'Invite Contestants',
+	'page callback' => 'during_invitation_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_invitation.inc',
+	);
+	
+	$items['during/invitation/accept/%'] = array(
+	'title' => 'Join Contest',
+	'page callback' => 'during_invitation_accept_page',
+	'page arguments' => array(3),
+	'access arguments' => array('join contest'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_registration.inc',
+	);
+	
+	$items['during/contest/close/%'] = array(
+	'title' => 'Close Contest',
+	'page callback' => 'during_contest_close_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_contest.inc',
+	);
+	
+	$items['during/event/view/%'] = array(
+	'title' => 'Event Results',
+	'page callback' => 'during_event_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_event.inc',
+	);	
+
+	$items['during/result/edit/%'] = array(
+	'title' => 'Edit Results',
+	'page callback' => 'during_result_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_result.inc',
+	);
+
+	$items['during/event/close/%'] = array(
+	'title' => 'Close Event',
+	'page callback' => 'during_score_event_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_score_event.inc',
+	);
+	
+	$items['during/results/view/%'] = array(
+	'title' => 'Event Results',
+	'page callback' => 'during_scores_page',
+	'page arguments' => array(3),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	'file' => 'z_score_event.inc',
+	);
+	
+	$items['during/testbutton/%'] = array(
+	'title' => 'Test Button',
+	'page callback' => 'during_test_button_page',
+	'page arguments' => array(2),
+	'access arguments' => array('access content'),
+	'type' => MENU_NORMAL_ITEM,
+	);	
+
+	return $items;
+}
+
+function during_permission() {
+  $perm = array();
+    $perm['join contest'] = array(
+      'title' => t('Join a Contest'),
+      'description' => t('Join active contests.'),
+    );
+	
+return $perm;
+}
+
+//ALLOW ADMIN USERS TO ADD OTHER USERS AS ADMINS
+function during_add_admin($access_guid='',$contest_guid,$user_id,$access_type,$user_mail='',$invitation_guid=''){
+	if($access_guid == ''){
+	$access_guid = during_random_guid('access',16);
+	}
+	if($user_id==''){
+		$user_id=NULL;
+	}
+	if($invitation_guid == ''){
+		$invitation_guid = NULL;
+	}
+	$new_access_id = db_merge('dur_access') // Table name no longer needs {}
+	->key(array('access_guid' => $access_guid))
+	->fields(array(
+	'access_guid' => $access_guid,
+    'contest_guid' => $contest_guid,
+	'user_id' => $user_id,
+	'access_type' => $access_type,
+	'user_mail' => $user_mail,
+	'invitation_guid' => $invitation_guid,
+  ))
+  ->execute();
+	return $new_access_id;
+}
+
+function generateRandStr($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+function during_random_guid($type='',$length=0){
+	if($type == '' || $length == 0){
+		$guid = '';
+	} else{
+		
+		switch($type){
+			case 'contest':
+				$table = 'dur_contest';
+				$key = 'contest_guid';
+				break;
+			case 'event':
+				$table = 'dur_event';
+				$key = 'event_guid';
+				break;
+			case 'registration':
+				$table = 'dur_registration';
+				$key = 'registration_guid';
+				break;
+			case 'access':
+				$table = 'dur_access';
+				$key = 'access_guid';
+				break;
+			case 'invitation':
+				$table = 'dur_invitation';
+				$key = 'invitation_guid';
+				break;
+			case 'result':
+				$table = 'dur_result';
+				$key = 'result_guid';
+				break;
+			case 'comment':
+				$table = 'dur_comments';
+				$key = 'comment_guid';
+				break;
+			case 'challenge':
+				$table = 'dur_challenge';
+				$key = 'challenge_guid';
+				break;
+			case 'prize':
+				$table = 'dur_prize';
+				$key = 'prize_guid';
+				break;
+			case 'scoring':
+				$table = 'dur_scoring';
+				$key = 'scoring_guid';
+				break;
+			case 'payout':
+				$table = 'dur_payout';
+				$key = 'payout_guid';
+				break;
+			default:
+				$table = '';
+				$key = '';
+				break;
+		}
+
+		if($table == '' || $key == ''){
+			$guid = '';
+		}else{		
+			$i = 1;
+			while($i!=0){
+				$guid = generateRandStr($length);
+				$i=0;
+				
+				$results = 	db_select($table, 'c')
+							->fields('c', array($key))
+							->condition($key,$guid,'=')
+							->execute();
+							
+					$rowCount = $results->rowCount();
+					if(!$rowCount){
+						$i=0;
+					}
+
+			}
+		};
+		return $guid;
+	};
+}
+
+function during_block_info(){
+$block['contestants'] = array(
+	'info' => t('Registered Contestants'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/contest/*',
+	'region' => 'sidebar_second',
+	'weight' => 10,
+	);
+$block['join_contest'] = array(
+	'info' => t('Join Contest'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/invitation/accept/*',
+	'region' => 'sidebar_second',
+	'weight' => 20,
+	);
+$block['admin_contest'] = array(
+	'info' => t('Admin Tasks'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/contest/view*',
+	'weight' => 30,
+	'region' => 'sidebar_second',
+	);
+$block['invite_form'] = array(
+	'info' => t('Invite Contestant'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/invitation/add/*',
+	'weight' => 30,
+	'region' => 'sidebar_second',
+	);
+$block['dur_comments'] = array(
+	'info' => t('Comments'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/*/view/*',
+	'weight' => 30,
+	'region' => 'sidebar_second',
+	);
+$block['dur_comment_form'] = array(
+	'info' => t('Comments Form'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/*/view/*',
+	'weight' => 30,
+	'region' => 'sidebar_second',
+	);
+$block['dur_recent_comments'] = array(
+	'info' => t('Recent Comments_During'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/contest/view/*',
+	'weight' => 30,
+	'region' => 'sidebar_first',
+	);
+$block['dur_contest_header'] = array(
+	'info' => t('CONTEST INFO'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/contest/view/*',
+	'weight' => 30,
+	);
+$block['dur_scoring_form'] = array(
+	'info' => t('Scoring Form'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/scoring/edit/*',
+	'weight' => 30,
+	);
+$block['my_results'] = array(
+	'info' => t('My Results'),
+	'cache' => DRUPAL_NO_CACHE,
+	'visibility' => BLOCK_VISIBILITY_LISTED,
+	'pages' => 'during/contest/view/*',
+	'weight' => 30,
+	);
+$block['test_button'] = array(
+	'info' => t('Test Button'),
+	'pages' => 'during/event/view/*',
+	);
+	return $block;
+}
+
+function during_block_view($block_key){
+   
+    $edit_type = arg(2);
+	$item_guid = arg(3);
+    $block = array();	
+    
+	
+	switch($block_key){
+
+		
+		case 'contestants':
+			module_load_include('inc', 'during', 'z_contest');
+			$block_define = contestant_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+        
+		
+		case 'join_contest':
+			module_load_include('inc', 'during', 'z_registration');
+			$block_define = registration_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		
+		case 'admin_contest':
+			module_load_include('inc', 'during', 'z_contest');
+			$block_define = admin_contest_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'invite_form':
+			module_load_include('inc', 'during', 'z_invitation');
+			$block_define = invitation_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'dur_comments':
+			module_load_include('inc', 'during', 'z_comments');
+			$block_define = dur_comments_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'dur_comment_form':
+			module_load_include('inc', 'during', 'z_comments');
+			$block_define = dur_comment_form_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'dur_recent_comments':
+			module_load_include('inc', 'during', 'z_comments');
+			$block_define = dur_recent_comments_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'dur_contest_header':
+			module_load_include('inc', 'during', 'z_contest');
+			$block_define = dur_contest_header_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'dur_scoring_form':
+			module_load_include('inc', 'during', 'z_scoring');
+			$block_define = dur_contest_scoring_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'my_results':
+			module_load_include('inc', 'during', 'z_contest');
+			$block_define = my_results_block_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		case 'test_button':
+			$block_define = test_button_define($item_guid);
+			if($block_define){
+			$block['subject'] = $block_define['subject'];
+			$block['content'] = $block_define['content'];
+			}
+			break;
+		default:
+			$block['subject'] = 'NO TITLE';
+            $block['content'] = 'Block not defined in during_block_view';
+			break;
+    }
+	return $block;
+}
+
+function test_button_define($item_guid){
+			$block_define = array();
+			$block_define['subject'] = t('Test Button');
+			$block_define['content'] = l('Test Here', 'during/testbutton/' . $item_guid);
+			return $block_define;
+}
+
+function during_test_button_page($item_guid){
+	$page = 'hello';
+				module_load_include('inc','during','z_contest');
+				 during_create_prizes($item_guid);
+				drupal_goto('during/contest/view/' . $item_guid);
+				return $page;
+}
